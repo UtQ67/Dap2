@@ -1,6 +1,8 @@
 public class Sortierung{
+
     public static void insertionSort(int[] array)
     {
+        // Implementation vom Algorithmus in der Vorlesung
         for(int j = 1; j < array.length; j++)
         {
             int key = array[j];
@@ -16,13 +18,14 @@ public class Sortierung{
         assert isSorted(array);
     }
 
-
+    // Copy and paste aus der Aufgabenstellung
     public static void mergeSort(int[] array) 
     { 
         int[] tmpArray = new int[array.length];
         mergeSort(array, tmpArray, 0, array.length-1);
         assert isSorted(array);
     }
+    // Merge Sort implementation aus dem Zusatzblatt
     public static void mergeSort(int[] array, int[] tmpArray, int left, int right)
     {
         if(left<right)
@@ -35,12 +38,12 @@ public class Sortierung{
     }
     public static void merge(int[] array, int[] tmpArray, int left, int middle, int right)
     {
-        // init counter variables. i > left array. j > right array. tmpI > temp Array
-        int i = left;
-        int j = middle + 1;
-        int tmpI = 0;
+        // Zähler Variablen
+        int i = left;       //Linkes Array
+        int j = middle + 1; //Rechtes Array
+        int tmpI = 0;       //Temporäres Array
 
-        // merge left and right array in tmpArray
+        //Sortieren vom linken und rechten Array im tmpArray, bis das linke oder reche Array leer ist
         while(i < middle + 1 && j <= right)
         {
             if(array[i] <= array[j])
@@ -56,12 +59,14 @@ public class Sortierung{
             }
         }
 
+        //Wenn das linke Array noch Elemente enthält wird alles in tmpArray kopiert
         while(i < middle + 1)
         {
             tmpArray[tmpI] = array[i];
             i++;
             tmpI++;
         }
+        //Wenn das rechte Array noch Elemente enthält wird alles in tmpArray kopiert
         while(j<= right)
         {
             tmpArray[tmpI] = array[j];
@@ -69,7 +74,8 @@ public class Sortierung{
             tmpI++;
         }
 
-        // copy tmpArray data to array
+        //tmpArray enthält das linke und rechte Array sortiert
+        //array wird von index left bis right den daten von tmpArray aktualisiert
         for(tmpI = 0; tmpI<=(right - left); tmpI++)
         {
             array[left + tmpI] = tmpArray[tmpI];
@@ -78,6 +84,7 @@ public class Sortierung{
 
     public static boolean isSorted(int[] array)
     {
+        
         for(int i = 1; i < array.length; i++)
         {
             if(array[i-1] > array[i])

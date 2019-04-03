@@ -4,11 +4,14 @@ public class Blatt02
 
     public static void main(String[] args) 
     {
-        // size of array to sort
+        //Größe des Arrays das sortiert werden soll
         int size = 0;
-        // how the starting array is going to be filled
+        //Füllart des Arrays  (rand, auf, ab)
         String arrayFill="rand";
+        //Der genutzte Algo zum sortieren (merge, insert)
         String sortType = "merge";
+
+        //Auslesen von Parametern
         try {
             size = Integer.parseInt(args[0]);
             if(args.length >= 2)
@@ -17,11 +20,12 @@ public class Blatt02
                 arrayFill = args[2];
 
         } catch (Exception e) {
+            // Parameter wurden falsch eingegeben.
             System.out.println("Parameter: array_size [insert|merge [auf|ab|rand]] ");
             System.exit(0);
         }
 
-        // creating and filling array dependent on the fill param
+        //Array initialisieren
         int[] array = new int[size];
         if(arrayFill.equals("rand"))
             fillArrayRandon(array);
@@ -30,10 +34,12 @@ public class Blatt02
         else if(arrayFill.equals("auf"))
             fillArrayAuf(array);
 
-        // time
+        //Timer variablen initialisieren
         long tEnd, tStart, msecs;
 
-        tStart = System.currentTimeMillis();
+        tStart = System.currentTimeMillis();//start timer
+
+        //auswahl des Algos zum sortieren
         if(sortType.equals("insert"))
         {
             Sortierung.insertionSort(array);
@@ -42,10 +48,11 @@ public class Blatt02
         {
             Sortierung.mergeSort(array);
         }
-        tEnd = System.currentTimeMillis();
+        tEnd = System.currentTimeMillis();//end timer
 
-        msecs = tEnd-tStart;
+        msecs = tEnd-tStart;//Berechnung der benötigten Zeit
 
+        //Ausgabe des Array wenn maximal 100 Einträge vorhanden sind
         if(array.length <= 100)
             print(array);
 
@@ -60,11 +67,14 @@ public class Blatt02
     private static void fillArrayRandon(int[] array)
     {
         java.util.Random numberGenerator = new java.util.Random();
+        //Zufälliges auffüllen des Array
         for(int i = 0; i < array.length; i++)
         {
             array[i] = numberGenerator.nextInt();
         }
     }
+    
+    //Das Array wird absteigend mit Zahlen gefüllt
     private static void fillArrayAb(int[] array)
     {
         for(int i = 0; i < array.length; i++)
@@ -72,6 +82,7 @@ public class Blatt02
             array[i] = array.length - i;
         }
     }
+    //Das Array wird aufsteigend mit Zahlen gefüllt
     private static void fillArrayAuf(int[] array)
     {
         for(int i = 0; i < array.length; i++)
@@ -80,6 +91,7 @@ public class Blatt02
         }
     }
 
+    //Ausgabe des Array
     public static void print(int[] array){
         System.out.print("Sorted Array: [");
         for (int i = 0; i < array.length; i++) {
