@@ -51,7 +51,7 @@ public class Blatt02
         tEnd = System.currentTimeMillis();//end timer
 
         msecs = tEnd-tStart;//Berechnung der benötigten Zeit
-
+        
         //Ausgabe des Array wenn maximal 100 Einträge vorhanden sind
         if(array.length <= 100)
             print(array);
