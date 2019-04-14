@@ -15,7 +15,7 @@ public class Sortierung{
             array[i+1] = key;
         }
 
-        assert isSorted(array);
+        assert isSorted(array):"Array wurde nicht richtig sortiert.";
     }
 
     // Copy and paste aus der Aufgabenstellung
@@ -23,7 +23,7 @@ public class Sortierung{
     { 
         int[] tmpArray = new int[array.length];
         mergeSort(array, tmpArray, 0, array.length-1);
-        assert isSorted(array);
+        assert isSorted(array):"Array wurde nicht richtig sortiert.";
     }
     // Merge Sort implementation aus dem Zusatzblatt
     public static void mergeSort(int[] array, int[] tmpArray, int left, int right)

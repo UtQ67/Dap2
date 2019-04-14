@@ -1,3 +1,4 @@
+import java.security.InvalidParameterException;
 
 public class Blatt02
 {
@@ -13,11 +14,24 @@ public class Blatt02
 
         //Auslesen von Parametern
         try {
+            // Auslesen von pflicht Parameter
             size = Integer.parseInt(args[0]);
+            // Auslesen vom optionalen Parameter 1 (welcher Sortier-Algorithmus verwendet werden soll)
             if(args.length >= 2)
+            {
                 sortType = args[1];
+                if(!(sortType.equals("merge") || sortType.equals("insert")))
+                    throw new InvalidParameterException();
+            }
+            // AUslesen vom optionalen Parameter 2 (wie das Array gemischt werden soll)
             if(args.length >= 3)
+            {
                 arrayFill = args[2];
+                if(!(arrayFill.equals("rand")||arrayFill.equals("auf")||arrayFill.equals("ab")))
+                    throw new InvalidParameterException();
+            }
+            if(args.length > 3)
+                throw new InvalidParameterException();
 
         } catch (Exception e) {
             // Parameter wurden falsch eingegeben.
@@ -35,20 +49,21 @@ public class Blatt02
             fillArrayAuf(array);
 
         //Timer variablen initialisieren
-        long tEnd, tStart, msecs;
-
-        tStart = System.currentTimeMillis();//start timer
+        long tEnd = 0, tStart = 0, msecs;
 
         //auswahl des Algos zum sortieren
         if(sortType.equals("insert"))
         {
+            tStart = System.currentTimeMillis();//start timer
             Sortierung.insertionSort(array);
+            tEnd = System.currentTimeMillis();//end timer
         }
         else
         {
+            tStart = System.currentTimeMillis();//start timer
             Sortierung.mergeSort(array);
+            tEnd = System.currentTimeMillis();//end timer
         }
-        tEnd = System.currentTimeMillis();//end timer
 
         msecs = tEnd-tStart;//Berechnung der benötigten Zeit
         
@@ -61,7 +76,7 @@ public class Blatt02
         else
             System.out.println("Feld NICHT sortiert!");
 
-        System.out.println("Zeit benötigt: " + msecs + "ms");
+        System.out.println("Zeit ben\u00f6tigt: " + msecs + "ms");
     }
 
     private static void fillArrayRandon(int[] array)
