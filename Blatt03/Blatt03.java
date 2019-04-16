@@ -2,7 +2,8 @@ import java.security.InvalidParameterException;
 
 public class Blatt03
 {
-    public static final String paramsDescription = "Add description";
+    public static final String paramsDescription = "Es wird ein Parameter erwartet.\n"+
+                                                    "\tPrameter 1:\tPositiver double wert. Welche Laufzeit zum Sortieren gesucht werden soll.";
     public static double tolerance = 0.1;
 
     public static void main(String[] args) {
@@ -74,7 +75,7 @@ public class Blatt03
         tEnd = System.currentTimeMillis();
         
         double secs = (double)(tEnd - tStart) / (double) 1000;
-        System.out.println(n + " Elementen\t " + secs + " Sekunden");
+        System.out.println(n + " Elementen\t\t " + secs + " Sekunden");
         // gemessene Zeit aktualisieren
         return secs;
     }
