@@ -16,44 +16,43 @@ public class Blatt03
             System.out.println(paramsDescription);
             System.exit(1);
         }
-       
-
-        double secs = -1;
 
         // n=500, da in der schleife n verdoppelt wird => start ist n = 1000
-        int n = 500;
-        
-        while(!(wantedTime < secs))
+        int n = 500;        
+        // secs wird zu -1 initialisiert, damit man immer in die erste schleife eintritt.
+        // wantedTime > -1 ist immer wahr, da die eingabe auf positive Zahlen beschränkt ist.
+        double secs = -1;
+        // Suchen von der Anzahl der Elemente die länger als wantedTime brauchen
+        while(wantedTime >= secs)
         {
             // n verdoppeln
             n *=2;
-
             secs = calculateTime(n);
-
-            
-
         }
 
         System.out.println("Binäre suche wird gestartet");
 
         // binäre suche
         int nLeft = n/2;   // n/2 ist die höchste bekannte anzahl an elementen die schneller sortiert wird als gesucht ist
-        int nRight = n;
+        int nRight = n;    // rechter Teil der binären Suche
         
         while(!(wantedTime - tolerance < secs && wantedTime + tolerance > secs))
         {
+            // Mitte bestimmen
             int nMiddle = (nRight + nLeft)/2;
 
             secs = calculateTime(nMiddle);
 
+            // wenn die benötigte Zeit kleiner ist als die gesuchte Zeit, muss in der Rechten hälfte weiter gesucht werden
             if(secs < wantedTime)
             {
                 nLeft = nMiddle;
-            }else
+            }
+            // sonst in der linken Hälfte
+            else
             {
                 nRight = nMiddle;
             }
-
             n = nMiddle;
         }
 
