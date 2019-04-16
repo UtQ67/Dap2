@@ -31,7 +31,7 @@ public class Blatt03
             secs = calculateTime(n);
         }
 
-        System.out.println("Binäre suche wird gestartet");
+        System.out.println("Bin\u00e4re suche wird gestartet");
 
         // binäre suche
         int nLeft = n/2;   // n/2 ist die höchste bekannte anzahl an elementen die schneller sortiert wird als gesucht ist
@@ -57,7 +57,7 @@ public class Blatt03
             n = nMiddle;
         }
 
-        System.out.println("Für " + n + " wird ungefähr " + wantedTime + " Sekunden benötigt");
+        System.out.println("F\u00fcr " + n + " wird ungef\u00e4hr " + wantedTime + " Sekunden ben\u00f6tigt");
     }
 
     public static double calculateTime(int n)
