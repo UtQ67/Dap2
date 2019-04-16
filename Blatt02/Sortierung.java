@@ -39,8 +39,8 @@ public class Sortierung{
     public static void merge(int[] array, int[] tmpArray, int left, int middle, int right)
     {
         // Zähler Variablen
-        int i = left;       //Linkes Array
-        int j = middle + 1; //Rechtes Array
+        int i = left;       //Linkes Array [i ... middle]
+        int j = middle + 1; //Rechtes Array [middle + 1 ... right]
         int tmpI = 0;       //Temporäres Array
 
         //Sortieren vom linken und rechten Array im tmpArray, bis das linke oder reche Array leer ist

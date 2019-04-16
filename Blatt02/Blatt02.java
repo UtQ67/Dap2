@@ -42,7 +42,7 @@ public class Blatt02
         //Array initialisieren
         int[] array = new int[size];
         if(arrayFill.equals("rand"))
-            fillArrayRandon(array);
+            fillArrayRandom(array);
         if(arrayFill.equals("ab"))
             fillArrayAb(array);
         else if(arrayFill.equals("auf"))
@@ -79,13 +79,13 @@ public class Blatt02
         System.out.println("Zeit ben\u00f6tigt: " + msecs + "ms");
     }
 
-    private static void fillArrayRandon(int[] array)
+    private static void fillArrayRandom(int[] array)
     {
         java.util.Random numberGenerator = new java.util.Random();
         //Zufälliges auffüllen des Array
         for(int i = 0; i < array.length; i++)
         {
-            array[i] = numberGenerator.nextInt();
+            array[i] = numberGenerator.nextInt(2*array.length);
         }
     }
     
