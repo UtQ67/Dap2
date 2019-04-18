@@ -9,6 +9,8 @@ public class Blatt03
     public static void main(String[] args) {
         double wantedTime = 0;
         try{
+            if(args.length != 1)
+                throw new InvalidParameterException();
             wantedTime = Double.parseDouble(args[0]);
             if(wantedTime < 0)
                 throw new InvalidParameterException();
@@ -75,7 +77,7 @@ public class Blatt03
         tEnd = System.currentTimeMillis();
         
         double secs = (double)(tEnd - tStart) / (double) 1000;
-        System.out.println(n + " Elementen\t\t " + secs + " Sekunden");
+        System.out.println(n + " Elemente\t\t " + secs + " Sekunden");
         // gemessene Zeit aktualisieren
         return secs;
     }
