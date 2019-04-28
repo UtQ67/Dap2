@@ -5,7 +5,7 @@ class ConvexHull
 {
 
     public static void main(String[] args) {
-        Point[] p = {new Point(10d,10d), new Point(10d, 100d), new Point(100d,10d), new Point(getRandom(), getRandom())};
+        Point[] p = {new Point(10d,10d), new Point(100d, 10d), new Point(10d,100d)};
         ConvexHull c = new ConvexHull();
         List<Point> hull = c.simpleConvex(p);
 
@@ -26,26 +26,37 @@ class ConvexHull
         }
         convexHull.add(p[smallestPointIndex]);
 
+     
         // simple convex aus der Vorlesung
-        for(int i = 0; i < p.length; i++)
+        Point lastPoint = convexHull.peekLast();
+        while(convexHull.size() == 1  || convexHull.peekFirst() != convexHull.peekLast())
         {
-            Point lastPoint = convexHull.peekLast();
-            // die betrachtetetn Punkte dürfen nicht gleich sein
-            if(lastPoint == p[i])
-                continue;
-
-            // Überprüft ob alle Punkte rechts von der gerade lastPoint -> p[i] ist.
-            // Wenn ja ist valid == true
-            // Sonts valid == false
-            boolean valid = true;
-            for(int j = 0; j < p.length; j++)
+       
+            for(int i = 0; i < p.length; i++)
             {
-                if(isLeft(lastPoint, p[i], p[j]))
-                    valid = false;
+                System.out.println(i);
+                
+                // die betrachtetetn Punkte dürfen nicht gleich sein
+                if(lastPoint == p[i])
+                    continue;
+
+                // Überprüft ob alle Punkte rechts von der gerade lastPoint -> p[i] ist.
+                // Wenn ja ist valid == true
+                // Sonts valid == false
+                boolean valid = true;
+                for(int j = 0; j < p.length; j++)
+                {
+                    if(isLeft(lastPoint, p[i], p[j]))
+                        valid = false;
+                }
+                // liegen alle Punkte rechts ist der Punkt Teil der konvxen hülle
+                if(valid)
+                {
+                    convexHull.addLast(p[i]);
+                    lastPoint=p[i];
+                    break;
+                }
             }
-            // liegen alle Punkte rechts ist der Punkt Teil der konvxen hülle
-            if(valid)
-                convexHull.add(p[i]);
         }
 
         return convexHull;
