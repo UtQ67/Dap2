@@ -33,7 +33,7 @@ class Anwendung
             System.out.println(INFO_MESSAGE);
             System.exit(0);
         }
-
+        System.out.println("Bearbeitete Datei \""+ args[1] + "\"");
         if(mode.equals(INTERVAL_STRING))
             interval(file);
         else
