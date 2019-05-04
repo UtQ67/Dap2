@@ -18,6 +18,8 @@ class Anwendung
         String mode = null;
         BufferedReader file = null;
         try {
+            if(args.length != 2)
+                throw new InvalidParameterException();
             if(args[0].equals(INTERVAL_STRING))
                 mode = INTERVAL_STRING;
             else if(args[0].equals(JOB_STRING))
