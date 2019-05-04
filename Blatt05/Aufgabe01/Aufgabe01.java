@@ -2,7 +2,8 @@ import java.security.InvalidParameterException;
 
 public class Aufgabe01
 {
-    public static final String INFO_STRING ="INFO";
+    public static final String INFO_STRING ="Es wird 1 Parameter benötigt \n"+
+                                            "\t1.Parameter: Laenge des zu sortierenden Arrays.";
     public static void main(String[] args) {
         int n = 0;
         try{

@@ -2,7 +2,9 @@ import java.security.InvalidParameterException;
 
 public class ATM
 {
-    public static final String INFO_STRING = "Info";
+    public static final String INFO_STRING = "Es werden 2 Parameter benötigt.\n"+
+                                                "\t1. Parameter: Welche Art der Währung verwendet werden sol (Euro, Alternativ)\n"+
+                                                "\t2. Parameter: Welcher Wert gewechselt werden soll";
     
     public static void main(String[] args) {
 

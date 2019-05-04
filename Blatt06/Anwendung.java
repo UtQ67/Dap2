@@ -9,7 +9,9 @@ import java.util.Collections;
 class Anwendung
 {
     
-    public static final String INFO_MESSAGE ="asd";
+    public static final String INFO_MESSAGE ="Es werden 2 Parameter benoetigt\n" + 
+                                             "\t1.Parameter: Job/Interval\n" + 
+                                             "\t2.Parameter: Path";
     public static final String INTERVAL_STRING = "Interval";
     public static final String JOB_STRING = "Job";
 
@@ -31,7 +33,6 @@ class Anwendung
 
         }catch (Exception e)
         {
-            e.printStackTrace();
             System.out.println(INFO_MESSAGE);
             System.exit(0);
         }
