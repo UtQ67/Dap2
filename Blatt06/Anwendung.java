@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.Collections;
@@ -9,13 +10,42 @@ class Anwendung
 {
     
     public static final String INFO_MESSAGE ="asd";
+    public static final String INTERVAL_STRING = "Interval";
+    public static final String JOB_STRING = "Job";
+
     public static void main(String[] args) {
 
+        String mode = null;
+        BufferedReader file = null;
+        try {
+            if(args[0].equals(INTERVAL_STRING))
+                mode = INTERVAL_STRING;
+            else if(args[0].equals(JOB_STRING))
+                mode = JOB_STRING;
+            else
+                throw new InvalidParameterException();
 
+            file = new BufferedReader(new FileReader(args[1]));
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            System.out.println(INFO_MESSAGE);
+            System.exit(0);
+        }
+
+        if(mode.equals(INTERVAL_STRING))
+            interval(file);
+        else
+            job(file);
+
+    }
+
+    private static void interval(BufferedReader file)
+    {
         ArrayList<Interval> intervals = new ArrayList<>();
 
-        try {
-            BufferedReader file = new BufferedReader(new FileReader(args[0]));
+        try{
             for(String zeile = file.readLine(); zeile != null; zeile = file.readLine())
             {
                 StringTokenizer st = new StringTokenizer(zeile, ",");
@@ -23,13 +53,11 @@ class Anwendung
 
                 intervals.add(interval);
             }
-        }catch (Exception e)
+        }catch(Exception e)
         {
-            e.printStackTrace();
-            System.out.println(INFO_MESSAGE);
-            System.exit(0);
+            System.out.println("Etwas ist schief gegangen");
         }
-        
+                
         System.out.print("Es wurden " + intervals.size() + " Intervalle eingelesen: ");
         printIntervalList(intervals);
 
@@ -37,10 +65,51 @@ class Anwendung
         Collections.sort(intervals);
         printIntervalList(intervals);
 
-        System.out.print("Berechnetes interval scheduling: ");
+        System.out.print("Berechnetes Intervalscheduling: ");
         ArrayList<Interval> schedule = intervalScheduling(intervals);
         printIntervalList(schedule);
+    }
 
+    private static void job(BufferedReader file)
+    {
+        ArrayList<Job> jobs = new ArrayList<>();
+
+        try{
+            for(String zeile = file.readLine(); zeile != null; zeile = file.readLine())
+            {
+                StringTokenizer st = new StringTokenizer(zeile, ",");
+                Job job = new Job(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
+
+                jobs.add(job);
+            }
+        }catch(Exception e)
+        {
+            System.out.println("Etwas ist schief gegangen");
+        }
+                
+        System.out.print("Es wurden " + jobs.size() + " Jobs eingelesen: ");
+        printJobList(jobs);
+
+        System.out.print("Sortiert: ");
+        Collections.sort(jobs);
+        printJobList(jobs);
+
+        System.out.print("Berechnetes Latenessscheduling: ");
+        int[] schedule = latenessScheduling(jobs);
+        System.out.print("[");
+        for(int i = 0; i < schedule.length; i++)
+        {
+            if(i != 0)
+                System.out.print(", ");
+            System.out.print(schedule[i]);
+        }
+        System.out.println("]");
+
+        System.out.print("Berechnete maximale verspätung: ");
+        int versp = schedule[schedule.length-1] + jobs.get(jobs.size()-1).getLength() - jobs.get(jobs.size()-1).getDeadline();
+        versp = versp <= 0 ? 0 : versp;
+
+        System.out.println(versp);
     }
 
     public static void printIntervalList(ArrayList<Interval> intervals)
@@ -54,6 +123,18 @@ class Anwendung
         }
         System.out.println("]");
     }
+    public static void printJobList(ArrayList<Job> jobs)
+    {
+        System.out.print("[");
+        for(int i = 0; i < jobs.size(); i++)
+        {
+            if(i != 0)
+                System.out.print(", ");
+            System.out.print(jobs.get(i));
+        }
+        System.out.println("]");
+    }
+
 
     public static ArrayList<Interval> intervalScheduling(ArrayList<Interval> intervals)
     {
@@ -78,4 +159,16 @@ class Anwendung
 
         return ret;
     }
+    public static int[] latenessScheduling(ArrayList<Job> jobs)
+    {
+        int[] schedule = new int[jobs.size()];
+        int z = 0;
+        for(int i = 0;i<jobs.size();i++)
+        {
+            schedule[i] = z;
+            z+=jobs.get(i).getLength();
+        }
+        return schedule;
+    }
+    
 }
