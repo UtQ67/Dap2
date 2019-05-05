@@ -20,12 +20,20 @@ public class Quicksort
             while( i<= j)
             {
                 assert invarianteIsRightFromJBiggerPivot(j+1, pivot, array): "Invariante ist nicht erfüllt";
-                assert invarianteIsLeftFromISmallerPivot(i-1, pivot, array) :"Invariante ist nicht erfüllt";
-
+                assert invarianteIsLeftFromISmallerPivot(i-1, pivot, array): "Invariante ist nicht erfüllt";
+                
+                // Invariante array[0.. i-1 ] < pivot
                 while(array[i] < pivot)
+                {
+                    assert invarianteIsLeftFromISmallerPivot(i-1, pivot, array): "Invariante ist nicht erfüllt";
                     i++;
+                }
+                // Invariante array[j+1...array.length] > pivot
                 while(array[j] > pivot)
+                {
+                    assert invarianteIsRightFromJBiggerPivot(j+1, pivot, array): "Invariante ist nicht erfüllt";
                     j--;
+                }
 
                 // array[i] < pivot und array[j] > pivot   =>    array[i] ind array[j] tauschen
                 if(i <= j)
