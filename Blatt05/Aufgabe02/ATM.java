@@ -2,21 +2,22 @@ import java.security.InvalidParameterException;
 
 public class ATM
 {
-    public static final String INFO_STRING = "Es werden 2 Parameter benötigt.\n"+
+    public static final String INFO_STRING = "Es werden 2 Parameter benoetigt.\n"+
                                                 "\t1. Parameter: Welche Art der Währung verwendet werden sol (Euro, Alternativ)\n"+
                                                 "\t2. Parameter: Welcher Wert gewechselt werden soll";
     
     public static void main(String[] args) {
 
         // Parameter die eingelesen werden müssen
-        int[] w = null;
-        int b = 0;
+        int[] w = null; // waehrung
+        int b = 0;      // Wert der gewechselt werden soll
+
         try{
             // Man benötigt genau 2 Parameter
             if(args.length != 2)
                 throw new InvalidParameterException();
 
-            // Einlesen von dem Erstem Parameter
+            // Einlesen von dem Erstem Parameter (mögliche eingaben: "Wert", "Alternative")
             if(args[0].equals("Euro"))
                 w = new int[]{200,100,50,20,10,5,2,1};
             else if(args[0].equals("Alternative"))
@@ -24,7 +25,7 @@ public class ATM
             else
                 throw new InvalidParameterException();
                 
-            // EInlesen vom 2. Parametr (Positiver integer wert)
+            // EInlesen vom 2. Parameter (Positiver integer wert)
             b = Integer.parseInt(args[1]);
             if(b < 0)
                 throw new InvalidParameterException();
@@ -48,11 +49,12 @@ public class ATM
         System.out.println("}");
     }
 
-
+    // Greedy-Algorithmus zum wechseln des Geldes
+    // Der Algorithmus ist optimal
     public static int[] change(int b, int[] w)
     {
         int[] exchange = new int[w.length];
-        
+     
         for(int i = 0; i < w.length; i++)
         {
             while(w[i] <= b)

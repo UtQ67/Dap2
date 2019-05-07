@@ -7,10 +7,12 @@ public class Aufgabe01
     public static void main(String[] args) {
         int n = 0;  //größe des zu sortiernden arrays
         try{
+            // Man brauucht genau 1 Parameter
             if(args.length != 1)
                 throw new InvalidParameterException();
             // Parameter einlesen
             n = Integer.parseInt(args[0]);
+            // Zahl darf nicht nativ sein
             if(n<0)
                 throw new InvalidParameterException();
         }catch(Exception e)
@@ -31,7 +33,7 @@ public class Aufgabe01
 
         msecs = tEnd - tStart;
 
-        System.out.println("Zeit benoertigt: " + msecs + "ms");
+        System.out.println("Zeit benoetigt: " + msecs + "ms");
         
     }
 

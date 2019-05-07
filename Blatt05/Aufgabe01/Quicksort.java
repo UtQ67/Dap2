@@ -19,23 +19,26 @@ public class Quicksort
             //             array[0.. i-1 ] < pivot
             while( i<= j)
             {
+                // invariante überprüfen
                 assert invarianteIsRightFromJBiggerPivot(j+1, pivot, array): "Invariante ist nicht erfüllt";
                 assert invarianteIsLeftFromISmallerPivot(i-1, pivot, array): "Invariante ist nicht erfüllt";
                 
                 // Invariante array[0.. i-1 ] < pivot
                 while(array[i] < pivot)
                 {
+                    // Invariante überprüfen
                     assert invarianteIsLeftFromISmallerPivot(i-1, pivot, array): "Invariante ist nicht erfüllt";
                     i++;
                 }
                 // Invariante array[j+1...array.length] > pivot
                 while(array[j] > pivot)
                 {
+                    // Invariate überprüfen
                     assert invarianteIsRightFromJBiggerPivot(j+1, pivot, array): "Invariante ist nicht erfüllt";
                     j--;
                 }
 
-                // array[i] < pivot und array[j] > pivot   =>    array[i] ind array[j] tauschen
+                // array[i] < pivot und array[j] > pivot   =>    array[i] und array[j] tauschen
                 if(i <= j)
                 {
                     int tmp = array[i];
@@ -52,6 +55,7 @@ public class Quicksort
         }
     }
 
+    // Überprüfen von invariante dass array[j..n] < pivot
     private static boolean invarianteIsRightFromJBiggerPivot(int j, int pivot, int[] array)
     {
         for(int i = j ; i < array.length; i++)
@@ -61,6 +65,7 @@ public class Quicksort
         }
         return true;
     }
+    // überprüfe von invariante array[0..i] > pivot
     private static boolean invarianteIsLeftFromISmallerPivot(int i, int pivot, int[] array)
     {
         for(int j = i; j >= 0; j--)
